@@ -1,25 +1,89 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<style>
+  left {
+    float: right;
+  }
+</style>
 <body>
-<div id="app">
-    {{ message }}
-</div>
-
-<div id="app-3">
-    <span v-if="seen">Now you see me</span>
-</div>
+  <form id="addData">
+    <div style="max-width: 400px;">
+      <label style="font-weight: bold; font-size: 20px;" for="name"
+        >Employee Name</label
+      >
+      <input
+        name="NAME"
+        style="float: right;"
+        id="name"
+        placeholder="Employee Name"
+      />
+    </div>
+    <br />
+    <div style="max-width: 400px;">
+      <label style="font-weight: bold; font-size: 20px;" for="role">Role</label>
+      <select style="float: right;" id="role" placeholder="name">
+        <option value="Full Stack Developer">Full Stack Developer</option>
+        <option value="Data scientist">Data scientist</option>
+        <option value="Data Analyst">Data Analyst</option>
+        <option value="Software Developer">Software Developer</option>
+      </select>
+    </div>
+    <br />
+    <div style="max-width: 400px;">
+      <label style="font-weight: bold; font-size: 20px;" for="lead"
+        >Leads</label
+      >
+      <select style="float: right;" id="lead" placeholder="name">
+        <option value="Amol">Amol</option>
+        <option value="Alex">Alex</option>
+        <option value="Scot">Scot</option>
+        <option value="Senthil">Senthil</option>
+      </select>
+    </div>
+  </form>
+  <div id="app-4">
+    <button
+      type="submit"
+      style="
+        font: bold;
+        color: snow;
+        background-color: black;
+        border: none;
+        border-radius: 10px;
+        padding: 10px;
+        align-self: center;
+      "
+      @click="saveData()"
+    >
+      SAVE
+    </button>
+    <div>
+      <ol>
+        <li v-for="emp in details">
+          {{ emp.name +' '+ emp.lead }}
+        </li>
+      </ol>
+    </div>
+  </div>
 </body>
 <script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            message: 'codingmart!'
-        }
-    })
-
-    var app3 = new Vue({
-        el: '#app-3',
-        data: {
-            seen: true
-        }
-    })
+  var app = new Vue({
+    el: "#app-4",
+    data: {
+      details: []
+    },
+    methods: {
+      saveData() {
+        var form = document.getElementById("addData");
+        var name = form.querySelector("#name");
+        var role = form.querySelector("#role");
+        var lead = form.querySelector("#lead");
+        app.details.push({
+          name: name.value,
+          role: role.value,
+          lead: lead.value
+        });
+        console.log("fffff", app.details);
+      }
+    }
+  });
 </script>
